@@ -188,7 +188,7 @@ describe('pos', () => {
 
     spyOn(console, 'log');
 
-    printReceipt(inputs);
+    printReceipt(tags);
 
     const expectText = `***<没钱赚商店>收据***
 名称：雪碧，数量：5瓶，单价：3.00(元)，小计：12.00(元)
