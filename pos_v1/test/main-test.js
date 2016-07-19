@@ -101,7 +101,7 @@ describe('pos', () => {
           count: 5
         },
         subtotal: 12.00,
-        save: 3.00
+        saved: 3.00
       },
       {
         cartItem: {
@@ -114,7 +114,7 @@ describe('pos', () => {
           count: 2
         },
         subtotal: 30.00,
-        save: 0.00
+        saved: 0.00
       },
       {
         cartItem: {
@@ -127,7 +127,7 @@ describe('pos', () => {
           count: 3
         },
         subtotal: 9.00,
-        save: 4.50
+        saved: 4.50
       }
     ];
 
@@ -148,7 +148,7 @@ describe('pos', () => {
           count: 5
         },
         subtotal: 12.00,
-        save: 3.00
+        saved: 3.00
       },
       {
         cartItem: {
@@ -161,7 +161,7 @@ describe('pos', () => {
           count: 2
         },
         subtotal: 30.00,
-        save: 0.00
+        saved: 0.00
       },
       {
         cartItem: {
@@ -174,12 +174,12 @@ describe('pos', () => {
           count: 3
         },
         subtotal: 9.00,
-        save: 4.50
+        saved: 4.50
       }
     ];
     let receipt = buildReceipt(receiptItems);
 
-    const expectReceipt = {receiptItems: receiptItems, actualTotal: 51.00, saveTotal: 7.50};
+    const expectReceipt = {receiptItems: receiptItems, actualTotal: 51.00, savedTotal: 7.50};
 
     expect(receipt).toEqual(expectReceipt);
   });
