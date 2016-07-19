@@ -3,6 +3,7 @@
 describe('pos', () => {
   let tags;
   let allItems = loadAllItems();
+  let promotions = loadPromotions();
 
   beforeEach(() => {
     tags = [
@@ -17,7 +18,7 @@ describe('pos', () => {
       'ITEM000005'
     ];
   });
-  
+
   it('print cartItems', () => {
 
     let cartItems = buildCartItems(tags, allItems);
@@ -53,6 +54,134 @@ describe('pos', () => {
     ];
 
     expect(cartItems).toEqual(expectCartItems);
+  });
+
+  it('print receiptItems', () => {
+
+    let cartItems = [
+      {
+        item: {
+          barcode: 'ITEM000001',
+          name: '雪碧',
+          unit: '瓶',
+          price: 3.00
+        },
+        count: 5
+      },
+      {
+        item: {
+          barcode: 'ITEM000003',
+          name: '荔枝',
+          unit: '斤',
+          price: 15.00
+        },
+        count: 2
+      },
+      {
+        item: {
+          barcode: 'ITEM000005',
+          name: '方便面',
+          unit: '袋',
+          price: 4.50
+        },
+        count: 3
+      }
+    ];
+    let receiptItems = buildReceiptItems(cartItems, promotions);
+
+    const expectReceiptItems = [
+      {
+        cartItem: {
+          item: {
+            barcode: 'ITEM000001',
+            name: '雪碧',
+            unit: '瓶',
+            price: 3.00
+          },
+          count: 5
+        },
+        subtotal: 12.00,
+        save: 3.00
+      },
+      {
+        cartItem: {
+          item: {
+            barcode: 'ITEM000003',
+            name: '荔枝',
+            unit: '斤',
+            price: 15.00
+          },
+          count: 2
+        },
+        subtotal: 30.00,
+        save: 0.00
+      },
+      {
+        cartItem: {
+          item: {
+            barcode: 'ITEM000005',
+            name: '方便面',
+            unit: '袋',
+            price: 4.50
+          },
+          count: 3
+        },
+        subtotal: 9.00,
+        save: 4.50
+      }
+    ];
+
+    expect(receiptItems).toEqual(expectReceiptItems);
+  });
+
+  it('print receipt', () => {
+
+    let receiptItems = [
+      {
+        cartItem: {
+          item: {
+            barcode: 'ITEM000001',
+            name: '雪碧',
+            unit: '瓶',
+            price: 3.00
+          },
+          count: 5
+        },
+        subtotal: 12.00,
+        save: 3.00
+      },
+      {
+        cartItem: {
+          item: {
+            barcode: 'ITEM000003',
+            name: '荔枝',
+            unit: '斤',
+            price: 15.00
+          },
+          count: 2
+        },
+        subtotal: 30.00,
+        save: 0.00
+      },
+      {
+        cartItem: {
+          item: {
+            barcode: 'ITEM000005',
+            name: '方便面',
+            unit: '袋',
+            price: 4.50
+          },
+          count: 3
+        },
+        subtotal: 9.00,
+        save: 4.50
+      }
+    ];
+    let receipt = buildReceipt(receiptItems);
+
+    const expectReceipt = {receiptItems: receiptItems, actualTotal: 51.00, saveTotal: 7.50};
+
+    expect(receipt).toEqual(expectReceipt);
   });
 
   it('should print correct text', () => {
